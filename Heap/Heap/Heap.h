@@ -1,0 +1,225 @@
+#pragma once
+#include<iostream>
+#include<assert.h>
+#include<vector>
+using namespace std;
+
+template<class T>
+struct Less
+{
+	bool operator()(const T& l,const T&r)
+	{
+		return l < r;
+	}
+};
+
+template<class T>
+struct Greater
+{
+	bool operator()(const T& l, const T& r)
+	{
+		return l > r;
+	}
+};
+
+template <class T,class Compare = Greater<T>>
+class Heap
+{
+public:
+	Heap()
+	{}
+
+	Heap(T* a, size_t n)
+		:_a(a,a+n)
+	{
+		for (int i = (_a.size() / 2); i >= 0; i--)
+		{
+			_AdjustDown(i);
+		}
+	}
+	
+	void Push(const T& x)
+	{
+		_a.push_back(x);
+		_AdjustUp(_a.size()-1);
+	}
+
+	void Pop()
+	{
+		swap(_a[0], _a[_a.size() - 1]);
+		_a.pop_back();
+		_AdjustDown(0);
+	}
+
+protected:
+	void _AdjustDown(int root)
+	{
+		Compare compare;
+		int parent = root;
+		int child = root * 2 + 1;
+		while (child < _a.size())
+		{
+			if (child + 1 < _a.size()
+				&&compare(_a[child+1],_a[child]))
+			{
+				++child;
+			}
+
+			if (compare(_a[child], _a[parent]))
+			{
+				swap(_a[child], _a[parent]);
+				parent = child;
+				child = parent * 2 + 1;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	void _AdjustUp(int child)
+	{
+		Compare compare;
+
+		int parent = (child - 1) / 2;
+		while (child > 0)
+		{
+			if (compare(_a[child], _a[parent]))
+			{
+				swap(_a[parent], _a[child]);
+				child = parent;
+				parent = (child - 1) / 2;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	bool Empty()
+	{
+		return _a.emptry();
+	}
+
+	void Size()
+	{
+		return _a.size();
+	}
+
+	T& Top()
+	{
+		if (_a.empty)
+			return 0;
+
+		return _a[0];
+	}
+
+protected:
+	vector<T> _a;
+};
+
+void AdjustDown(int* a, int n, int root)
+{
+	int parent = root;
+	int child = parent * 2 + 1;
+	while (child < n)
+	{
+		if (child + 1 < n && a[child + 1] < a[child])
+		{
+			++child;
+		}
+
+		if (a[child] < a[parent])
+		{
+			swap(a[child], a[parent]);
+			parent = child;
+			child = parent * 2 + 1;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+
+void GetTopK(int* a, const int n, const int k)
+{
+	assert(n > k && a);
+
+	int* heap = new int[k];
+	for (size_t i = 0; i < k; ++i)
+	{
+		heap[i] = a[i];
+	}
+	for (int i = (k - 2) / 2; i >= 0; --i)
+	{
+		AdjustDown(heap, k, i);
+	}
+	for (size_t i = k; i < n; ++i)
+	{
+		if (a[i] > heap[0])
+		{
+			heap[0] = a[i];
+		}
+
+		AdjustDown(heap, k, 0);
+	}
+
+	cout << "最大的前" << k << "个数据:" << endl;
+	for (size_t i = 0; i < k; ++i)
+	{
+		cout << heap[i] << " ";
+	}
+
+	delete[] heap;
+}
+
+void TestTopK()
+{
+	const int N = 1000, K = 5;
+	int a[N];
+	for (size_t i = 0; i < N; ++i)
+	{
+		a[i] = rand() % N;
+	}
+
+	a[0] = N + 1;
+	a[10] = N + 2;
+	a[100] = N + 3;
+	a[99] = N + 4;
+	a[50] = N + 5;
+
+
+	GetTopK(a, N, K);
+}
+
+void HeapSort(int* a, int n)
+{
+	assert(n);
+
+	for (int i = (n - 2) / 2; i >= 0; --i)
+	{
+		AdjustDown(a, n, i);
+	}
+
+	int end = n - 1;
+	while (end > 0)
+	{
+		swap(a[0], a[end]);
+		AdjustDown(a, end, 0);
+		--end;
+	}
+}
+
+void HeapTest()
+{
+	int a[] = { 10,21,12,23,13,15,16,17 };
+	Heap<int, Less<int>> hp1(a, sizeof(a) / sizeof(a[0]));
+	hp1.Push(20);
+	HeapSort(a,8);
+}
+
+
