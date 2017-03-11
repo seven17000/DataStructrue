@@ -1,6 +1,12 @@
 #pragma once
 #include<iostream>
 
+/*
+*Authorï¼šseven17000
+*Dateï¼š2017.02.28
+*Contentï¼šå®ç°äºŒå‰æœç´¢æ ‘
+*/
+
 template<class K,class V>
 struct SearchBinaryTreeNode
 {
@@ -8,7 +14,7 @@ struct SearchBinaryTreeNode
 	SearchBinaryTreeNode<K, V>* _right;
 
 	//const K _key;
-	K _key;//´Ë´¦ÔÚÉ¾³ı½áµãÊ±»á·¢ÉúÌæ»»£¬²»ÄÜÎªconst
+	K _key;//æ­¤å¤„åœ¨åˆ é™¤ç»“ç‚¹æ—¶ä¼šå‘ç”Ÿæ›¿æ¢ï¼Œä¸èƒ½ä¸ºconst
 	V _value;
 
 	SearchBinaryTreeNode(const K& k, const V& v)
@@ -46,7 +52,7 @@ public:
 		root = NULL;
 	}
 
-	//²åÈë½Úµãµİ¹éÊµÏÖ
+	//æ’å…¥èŠ‚ç‚¹é€’å½’å®ç°
 	bool InsertR(const K& key, const V& value)
 	{
 		return _InsertR(_root, key, value);
@@ -72,7 +78,7 @@ public:
 			return false;
 	}
 	
-	//É¾³ı½áµãµİ¹éÊµÏÖ
+	//åˆ é™¤ç»“ç‚¹é€’å½’å®ç°
 	bool RemoveR(const K& key)
 	{
 		return _RemoveR(_root, key);
@@ -85,7 +91,7 @@ public:
 			return false;
 		}
 
-		//ÕÒµ½ÒªÉ¾³ıµÄ½áµã
+		//æ‰¾åˆ°è¦åˆ é™¤çš„ç»“ç‚¹
 		if (key < root->_key)
 		{
 			return _RemoveR(root->_left, key);
@@ -97,25 +103,25 @@ public:
 		else
 		{
 			if (root->_left == NULL)
-			{//ÒªÉ¾³ıµÄ½áµã×óº¢×ÓÎª¿ÕÊ±
+			{//è¦åˆ é™¤çš„ç»“ç‚¹å·¦å­©å­ä¸ºç©ºæ—¶
 				root = root->_right;
 			}
 			else if (root->_right == NULL)
-			{//ÒªÉ¾³ıµÄ½áµãÓÒº¢×ÓÎª¿ÕÊ±
+			{//è¦åˆ é™¤çš„ç»“ç‚¹å³å­©å­ä¸ºç©ºæ—¶
 				root = root->_left;
 			}
 			else
-			{//×óÓÒ¶¼²»Îª¿ÕÊ±
+			{//å·¦å³éƒ½ä¸ä¸ºç©ºæ—¶
 				Node* del = root;
 				Node* parent = root;
 				Node* subLeft = root->_right;
 				while (subLeft->_left)
-				{//ÕÒµ½ÒªÉ¾³ı½áµãµÄÖĞĞòµÄºó¼Ì½áµã
+				{//æ‰¾åˆ°è¦åˆ é™¤ç»“ç‚¹çš„ä¸­åºçš„åç»§ç»“ç‚¹
 					parent = subLeft;
 					subLeft = subLeft->_left;
 				}
 
-				//Ê¹¸Ã½áµãÓëÒªÉ¾³ı½áµã½»»»
+				//ä½¿è¯¥ç»“ç‚¹ä¸è¦åˆ é™¤ç»“ç‚¹äº¤æ¢
 				root->_key = subLeft->_key;
 				root->_value = subLeft->_value;
 				del = subLeft;
@@ -135,7 +141,7 @@ public:
 		}
 	}
 
-	//²éÕÒµİ¹éÊµÏÖ
+	//æŸ¥æ‰¾é€’å½’å®ç°
 	Node* FindR(const K& key)
 	{
 		return FindR(_root, key);
@@ -163,7 +169,7 @@ public:
 	}
 
 	bool Insert(const K& key,const V& value)
-	{//·Çµİ¹éµÄ²åÈë
+	{//éé€’å½’çš„æ’å…¥
 		if (_root == NULL)
 		{
 			_root = new Node<key, value>;
@@ -204,7 +210,7 @@ public:
 	}
 
 	bool Remove(const K& key)
-	{//·Çµİ¹éµÄÉ¾³ı½áµã
+	{//éé€’å½’çš„åˆ é™¤ç»“ç‚¹
 		if (_root == NULL)
 			return false;
 
