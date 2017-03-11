@@ -4,6 +4,11 @@
 #include<stack>
 #include<assert.h>
 using namespace std;
+/*
+*Authorï¼šseven17000
+*Dateï¼š2017.01.05
+*Contentï¼šå®ç°äº†äºŒå‰æ ‘
+*/
 
 template<class T>
 struct BinaryTreeNode
@@ -54,28 +59,28 @@ public:
 		_root = NULL;
 	}
 
-	//Ç°Ğò±éÀú¶ş²æÊ÷£¨µİ¹é£©
+	//å‰åºéå†äºŒå‰æ ‘ï¼ˆé€’å½’ï¼‰
 	void PrevOdrder()
 	{
 		_PrevOrder(_root);
 		cout << endl;
 	}
 
-	//ÖĞĞò±éÀú¶ş²æÊ÷£¨µİ¹é£©
+	//ä¸­åºéå†äºŒå‰æ ‘ï¼ˆé€’å½’ï¼‰
 	void InOrder()
 	{
 		_InOrder(_root);
 		cout << endl;
 	}
 
-	//ºóĞò±éÀú¶ş²æÊ÷£¨µİ¹é£©
+	//ååºéå†äºŒå‰æ ‘ï¼ˆé€’å½’ï¼‰
 	void PostOrder()
 	{
 		_PostOrder(_root);
 		cout << endl;
 	}
 
-	//²ãĞò±éÀú
+	//å±‚åºéå†
 	void LevelOrder()
 	{
 		queue<Node*> q;
@@ -102,7 +107,7 @@ public:
 		cout << endl;
 	}
 
-	//Ç°Ğò±éÀú£¨·Çµİ¹é£©
+	//å‰åºéå†ï¼ˆéé€’å½’ï¼‰
 	void PrevOrderNor()
 	{
 		stack<Node*> s;
@@ -124,7 +129,7 @@ public:
 		cout << endl;
 	}
 
-	//ÖĞĞò±éÀú£¨·Çµİ¹é£©
+	//ä¸­åºéå†ï¼ˆéé€’å½’ï¼‰
 	void InOrderNor()
 	{
 		stack<Node*> s;
@@ -145,7 +150,7 @@ public:
 		cout << endl;
 	}
 
-	//ºóĞò±éÀú£¨·Çµİ¹é£©
+	//ååºéå†ï¼ˆéé€’å½’ï¼‰
 	void PostOrderNor()
 	{
 		stack<Node*> s;
@@ -217,7 +222,7 @@ public:
 		return ret;
 	}
 protected:
-	size_t _Size(Node* root,size_t& count)//Ê¹ÓÃµİ¹é£¬¼ÆÊıÆ÷´«ÒıÓÃ¡£
+	size_t _Size(Node* root,size_t& count)//ä½¿ç”¨é€’å½’ï¼Œè®¡æ•°å™¨ä¼ å¼•ç”¨ã€‚
 	{
 		if (root == NULL)
 			return 0;
