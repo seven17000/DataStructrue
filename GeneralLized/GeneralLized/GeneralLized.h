@@ -2,16 +2,22 @@
 #include <Cassert>  
 using namespace std;
 
+/*
+*Authorï¼šseven17000
+*Dateï¼š2016.12.10
+*Contentï¼šå®ç°äº†å¹¿ä¹‰è¡¨
+*/
+
 enum TYPE
 {
-	HEAD,   //Í·ÀàĞÍ  
-	VALUE,  //ÖµÀàĞÍ  
-	SUB,    //×Ó±íÀàĞÍ  
+	HEAD,   //å¤´ç±»å‹  
+	VALUE,  //å€¼ç±»å‹  
+	SUB,    //å­è¡¨ç±»å‹  
 };
 
 typedef struct GeneralListNode
 {
-	GeneralListNode(TYPE type, const char str = 0)//´´½¨½Úµã  
+	GeneralListNode(TYPE type, const char str = 0)//åˆ›å»ºèŠ‚ç‚¹  
 		:_type(type)
 		, _next(NULL)
 	{
@@ -34,8 +40,8 @@ typedef struct GeneralListNode
 
 	union
 	{
-		char _value;//Öµ½ÚµãµÄÖµ  
-		struct GeneralListNode* _sublink;//Ö¸Ïò×Ó±íµÄÖ¸Õë  
+		char _value;//å€¼èŠ‚ç‚¹çš„å€¼  
+		struct GeneralListNode* _sublink;//æŒ‡å‘å­è¡¨çš„æŒ‡é’ˆ  
 	};
 
 
@@ -44,7 +50,7 @@ typedef struct GeneralListNode
 class GeneralLized
 {
 public:
-	GeneralLized(const char* str)//¹¹Ôìº¯Êı  
+	GeneralLized(const char* str)//æ„é€ å‡½æ•°  
 	{
 		_head = _CreatList(str);
 	}
@@ -53,13 +59,13 @@ public:
 	{
 		_head = _Copy(g._head);
 	}
-	////¼ò½à°æµÄ¸³ÖµÔËËã·ûÖØÔØ1  
+	////ç®€æ´ç‰ˆçš„èµ‹å€¼è¿ç®—ç¬¦é‡è½½1  
 	//GeneralLized& operator=(GeneralLized g)  
 	//{  
 	//  swap(_head,g._head);  
 	//  return *this;  
 	//}  
-	//¼ò½à°æµÄ¸³ÖµÔËËã·ûÖØÔØ2  
+	//ç®€æ´ç‰ˆçš„èµ‹å€¼è¿ç®—ç¬¦é‡è½½2  
 	GeneralLized& operator=(const GeneralLized& g)
 	{
 		Node* tmp = _Copy(g._head);
@@ -76,21 +82,21 @@ public:
 			_head = NULL;
 		}
 	}
-	void PrintGeneralLized()//´òÓ¡¹ãÒå±í  
+	void PrintGeneralLized()//æ‰“å°å¹¿ä¹‰è¡¨  
 	{
 		_Print(_head);
 		cout << endl;
 	}
-	size_t Size()//ÇóÖµ½Úµã¸öÊı  
+	size_t Size()//æ±‚å€¼èŠ‚ç‚¹ä¸ªæ•°  
 	{
 		return _Size(_head);
 	}
-	size_t Depth()//¹ãÒå±íµÄÉî¶È  
+	size_t Depth()//å¹¿ä¹‰è¡¨çš„æ·±åº¦  
 	{
 		return _Depth(_head);
 	}
 protected:
-	bool IsValue(const char& s)//ÅĞ¶ÏÊÇ·ñÊÇÓĞĞ§Öµ  
+	bool IsValue(const char& s)//åˆ¤æ–­æ˜¯å¦æ˜¯æœ‰æ•ˆå€¼  
 	{
 		if ((s >= '0' && s <= '9')
 			|| (s >= 'a' && s >= 'z')
@@ -100,29 +106,29 @@ protected:
 		}
 		return false;
 	}
-	Node* _CreatList(const char*& s)//´´½¨¹ãÒå±í  
+	Node* _CreatList(const char*& s)//åˆ›å»ºå¹¿ä¹‰è¡¨  
 	{
-		assert(*s == '(');//¶ÏÑÔµÚÒ»¸ö×Ö·û±ØĞëÊÇ'('  
-		s++;//sÏòºóÆ«ÒÆ1£¬Ìø¹ı'('  
-		Node* head = new Node(HEAD);//´´½¨ĞÂ½Úµã  
-		Node* cur = head;//´´½¨µ±Ç°½ÚµãÀ´²åÈëĞÂÊı¾İ  
+		assert(*s == '(');//æ–­è¨€ç¬¬ä¸€ä¸ªå­—ç¬¦å¿…é¡»æ˜¯'('  
+		s++;//så‘ååç§»1ï¼Œè·³è¿‡'('  
+		Node* head = new Node(HEAD);//åˆ›å»ºæ–°èŠ‚ç‚¹  
+		Node* cur = head;//åˆ›å»ºå½“å‰èŠ‚ç‚¹æ¥æ’å…¥æ–°æ•°æ®  
 
 		while (*s)
 		{
-			if (IsValue(*s))//Öµ½Úµã  
+			if (IsValue(*s))//å€¼èŠ‚ç‚¹  
 			{
-				cur->_next = new Node(VALUE, *s);//´´½¨Êı¾İ½Úµã  
+				cur->_next = new Node(VALUE, *s);//åˆ›å»ºæ•°æ®èŠ‚ç‚¹  
 				cur = cur->_next;
 				s++;
 			}
-			else if (*s == '(')//×Ó±í  
+			else if (*s == '(')//å­è¡¨  
 			{
-				Node* newNode = new Node(SUB);//ĞÂ½¨×Ó±í½Úµã  
-				cur->_next = newNode;//Î²²å×Ó±í½Úµã  
+				Node* newNode = new Node(SUB);//æ–°å»ºå­è¡¨èŠ‚ç‚¹  
+				cur->_next = newNode;//å°¾æ’å­è¡¨èŠ‚ç‚¹  
 				cur = cur->_next;
-				newNode->_sublink = _CreatList(s);//µİ¹é´´½¨×Ó±í  
+				newNode->_sublink = _CreatList(s);//é€’å½’åˆ›å»ºå­è¡¨  
 			}
-			else if (*s == ')')//×Ó±í½áÊø  
+			else if (*s == ')')//å­è¡¨ç»“æŸ  
 			{
 				s++;
 				return head;
@@ -137,24 +143,24 @@ protected:
 	Node* _Copy(Node* head)
 	{
 		Node* cur = head;
-		Node* newHead = new Node(HEAD);//ĞÂ¹ãÒå±íµÄÍ·½Úµã  
-		Node* newCur = newHead;//ĞÂ¹ãÒå±íµÄµ±Ç°½Úµã  
-		cur = cur->_next;//Ìø¹ıÍ·½Úµã  
+		Node* newHead = new Node(HEAD);//æ–°å¹¿ä¹‰è¡¨çš„å¤´èŠ‚ç‚¹  
+		Node* newCur = newHead;//æ–°å¹¿ä¹‰è¡¨çš„å½“å‰èŠ‚ç‚¹  
+		cur = cur->_next;//è·³è¿‡å¤´èŠ‚ç‚¹  
 
 		while (cur)
 		{
-			if (cur->_type == VALUE)//Öµ½Úµã  
+			if (cur->_type == VALUE)//å€¼èŠ‚ç‚¹  
 			{
-				newCur->_next = new Node(VALUE, cur->_value);//´´½¨ĞÂµÄÖµ½Úµã  
+				newCur->_next = new Node(VALUE, cur->_value);//åˆ›å»ºæ–°çš„å€¼èŠ‚ç‚¹  
 				cur = cur->_next;
 				newCur = newCur->_next;
 			}
-			else if (cur->_type == SUB)//×Ó±í½Úµã  
+			else if (cur->_type == SUB)//å­è¡¨èŠ‚ç‚¹  
 			{
-				Node* newSub = new Node(SUB);//ĞÂ½¨×Ó±í½Úµã  
+				Node* newSub = new Node(SUB);//æ–°å»ºå­è¡¨èŠ‚ç‚¹  
 				newCur->_next = newSub;
 				newCur = newCur->_next;
-				newSub->_sublink = _Copy(cur->_sublink);//µİ¹é¿½±´×Ó±í  
+				newSub->_sublink = _Copy(cur->_sublink);//é€’å½’æ‹·è´å­è¡¨  
 				cur = cur->_next;
 			}
 			else
@@ -171,14 +177,14 @@ protected:
 
 		while (cur)
 		{
-			if (cur->_type == SUB)//×Ó±í½Úµã  
+			if (cur->_type == SUB)//å­è¡¨èŠ‚ç‚¹  
 			{
 				del = cur;
 				cur = cur->_next;
 				_Destroy(del->_sublink);
 				delete del;
 			}
-			else//Öµ½ÚµãorÍ·½Úµã  
+			else//å€¼èŠ‚ç‚¹orå¤´èŠ‚ç‚¹  
 			{
 				del = cur;
 				cur = cur->_next;
@@ -186,27 +192,27 @@ protected:
 			}
 		}
 	}
-	Node* _Print(Node* head)//´òÓ¡¹ã¶È±í  
+	Node* _Print(Node* head)//æ‰“å°å¹¿åº¦è¡¨  
 	{
 		Node* cur = head;
 		while (cur)
 		{
-			if (cur->_type == HEAD)//Í·½áµãÖ±½Ó´òÓ¡'('  
+			if (cur->_type == HEAD)//å¤´ç»“ç‚¹ç›´æ¥æ‰“å°'('  
 			{
 				cout << '(';
 			}
-			else if (cur->_type == VALUE)//Öµ½Úµã  
+			else if (cur->_type == VALUE)//å€¼èŠ‚ç‚¹  
 			{
 				cout << cur->_value;
-				if (NULL != cur->_next)//×Ó±íÎ´½áÊøÊ±£¬ÓÃ','·Ö¸îÊı¾İ  
+				if (NULL != cur->_next)//å­è¡¨æœªç»“æŸæ—¶ï¼Œç”¨','åˆ†å‰²æ•°æ®  
 				{
 					cout << ',';
 				}
 			}
-			else if (cur->_type == SUB)//×Ó±íÏî  
+			else if (cur->_type == SUB)//å­è¡¨é¡¹  
 			{
-				_Print(cur->_sublink);//µİ¹é´òÓ¡×Ó±í  
-				if (NULL != cur->_next)//×Ó±í½áÏîÊøÊ±£¬ÓÃ','·Ö¸î  
+				_Print(cur->_sublink);//é€’å½’æ‰“å°å­è¡¨  
+				if (NULL != cur->_next)//å­è¡¨ç»“é¡¹æŸæ—¶ï¼Œç”¨','åˆ†å‰²  
 				{
 					cout << ',';
 				}
@@ -220,17 +226,17 @@ protected:
 		cout << ')';
 		return head;
 	}
-	size_t _Size(Node* head)//Êı¾İ½ÚµãµÄ¸öÊı  
+	size_t _Size(Node* head)//æ•°æ®èŠ‚ç‚¹çš„ä¸ªæ•°  
 	{
 		size_t count = 0;
 		Node* cur = head;
 		while (cur)
 		{
-			if (cur->_type == VALUE)//ÈôÎªÖµ½ÚµãÔòcount++  
+			if (cur->_type == VALUE)//è‹¥ä¸ºå€¼èŠ‚ç‚¹åˆ™count++  
 			{
 				count++;
 			}
-			else if (cur->_type == SUB)//ÈôÎª×Ó±í½Úµã£¬Ôòcount+=×Ó±íÊı¾İ½Úµã  
+			else if (cur->_type == SUB)//è‹¥ä¸ºå­è¡¨èŠ‚ç‚¹ï¼Œåˆ™count+=å­è¡¨æ•°æ®èŠ‚ç‚¹  
 			{
 				count += _Size(cur->_sublink);
 			}
@@ -243,18 +249,18 @@ protected:
 		}
 		return count;
 	}
-	size_t _Depth(Node* head)//ÇóÈ¡¹ãÒå±íÉî¶È  
+	size_t _Depth(Node* head)//æ±‚å–å¹¿ä¹‰è¡¨æ·±åº¦  
 	{
 		Node* cur = head;
-		size_t maxDepth = 1;//Í·½Úµã²»Îª¿Õ£¬ÔòÉî¶ÈÎª1  
+		size_t maxDepth = 1;//å¤´èŠ‚ç‚¹ä¸ä¸ºç©ºï¼Œåˆ™æ·±åº¦ä¸º1  
 
 		while (cur)
 		{
-			if (cur->_type == SUB)//×Ó±í  
+			if (cur->_type == SUB)//å­è¡¨  
 			{
-				if (maxDepth < _Depth(cur->_sublink) + 1)//µ±Ç°Éî¶ÈÎª×Ó±íÏîÉî¶È+1  
+				if (maxDepth < _Depth(cur->_sublink) + 1)//å½“å‰æ·±åº¦ä¸ºå­è¡¨é¡¹æ·±åº¦+1  
 				{
-					maxDepth = _Depth(cur->_sublink) + 1;//¸üĞÂ×Ó±íÏî  
+					maxDepth = _Depth(cur->_sublink) + 1;//æ›´æ–°å­è¡¨é¡¹  
 				}
 			}
 			cur = cur->_next;
@@ -262,5 +268,5 @@ protected:
 		return maxDepth;
 	}
 protected:
-	Node* _head;//¹ãÒå±íµÄÍ·½áµã  
+	Node* _head;//å¹¿ä¹‰è¡¨çš„å¤´ç»“ç‚¹  
 };
