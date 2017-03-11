@@ -3,6 +3,12 @@
 #include<iostream>
 using namespace std;
 
+/*
+*Authorï¼šseven17000
+*Dateï¼š2017.03.04
+*Contentï¼šå®ç°äº†AVLæ ‘
+*/
+
 template<class K,class V>
 struct AVLTreeNode
 {
@@ -62,7 +68,7 @@ public:
 		Node* parent = NULL;
 		Node* cur = _root;
 		while(cur)
-		{//ÕÒµ½Òª²åÈë½áµãµÄ¸¸½ÚµãÎ»ÖÃ
+		{//æ‰¾åˆ°è¦æ’å…¥ç»“ç‚¹çš„çˆ¶èŠ‚ç‚¹ä½ç½®
 			if (key < cur->_key)
 			{
 				parent = cur;
@@ -79,7 +85,7 @@ public:
 			}
 		}
 
-		//²åÈëĞÂ½áµã
+		//æ’å…¥æ–°ç»“ç‚¹
 		cur = new Node(key, value);
 		if (key < parent->_key)
 		{
@@ -93,7 +99,7 @@ public:
 		}
 
 		while (parent)
-		{//µ÷ÕûÆ½ºâÒò×Ó
+		{//è°ƒæ•´å¹³è¡¡å› å­
 			if (parent->_left == cur)
 				parent->_bf -= 1;
 			else
@@ -103,7 +109,7 @@ public:
 				break;
 			else if (parent->_bf == 1
 				|| parent->_bf == -1)
-			{//¸¸½áµãµÄÆ½ºâÒò×Ó±ä»¯£¬¼ÌĞøÏòÉÏ¸üĞÂ
+			{//çˆ¶ç»“ç‚¹çš„å¹³è¡¡å› å­å˜åŒ–ï¼Œç»§ç»­å‘ä¸Šæ›´æ–°
 				cur = parent;
 				parent = cur->_parent;
 			}
@@ -148,7 +154,7 @@ public:
 	}
 
 	bool _Remove(Node* root,const K& key)
-	{//Óë¶ş²æËÑË÷Ê÷µÄÉ¾³ı»ù±¾ÏàÍ¬
+	{//ä¸äºŒå‰æœç´¢æ ‘çš„åˆ é™¤åŸºæœ¬ç›¸åŒ
 		if (root == NULL)
 			return false;
 
@@ -191,7 +197,7 @@ public:
 				subLeft = subLeft->_right;
 
 				while (del->_parent)
-				{//µ÷ÕûÆ½ºâ£¬´ÓÒª±»ÕæÕıdeleteµÄÄÇ¸ö½áµã¿ªÊ¼ÏòÉÏµ÷Õû
+				{//è°ƒæ•´å¹³è¡¡ï¼Œä»è¦è¢«çœŸæ­£deleteçš„é‚£ä¸ªç»“ç‚¹å¼€å§‹å‘ä¸Šè°ƒæ•´
 					if (del->_parent->_bf == 2
 						|| del->_parent->_bf == -2)
 					{
@@ -226,12 +232,12 @@ public:
 	}
 
 	bool IsBalance()
-	{//ÅĞ¶ÏÊÇ·ñÆ½ºâ
+	{//åˆ¤æ–­æ˜¯å¦å¹³è¡¡
 		return _IsBalance(_root);
 	}
 
 	size_t _Depth(Node* root)
-	{//ÇóÉî¶È
+	{//æ±‚æ·±åº¦
 		if (root == NULL)
 			return 0;
 		
@@ -243,7 +249,7 @@ public:
 	}
 
 	bool _IsBalance(Node* root)
-	{//Ê±¼ä¸´ÔÓ¶ÈO(N?)
+	{//æ—¶é—´å¤æ‚åº¦O(N?)
 		if (root == NULL)
 			return true;
 
@@ -252,7 +258,7 @@ public:
 
 		if ((rightH - leftH) != root->_bf)
 		{
-			cout << "Æ½ºâÒò×ÓÒì³££º" << root->_key << endl;
+			cout << "å¹³è¡¡å› å­å¼‚å¸¸ï¼š" << root->_key << endl;
 		}
 
 		return abs(rightH - leftH) <= 1 
@@ -261,13 +267,13 @@ public:
 	}
 
 	bool IsBalanceOP()
-	{//ÅĞ¶ÏÊÇ·ñÆ½ºâ
+	{//åˆ¤æ–­æ˜¯å¦å¹³è¡¡
 		size_t depth= 0;
 		return _IsBalanceOP(_root,depth);
 	}
 
 	bool _IsBalanceOP(Node* root, size_t& depth)
-	{//Ê±¼ä¸´ÔÓ¶ÈO(N)
+	{//æ—¶é—´å¤æ‚åº¦O(N)
 		if (root == NULL)
 		{
 			depth = 0;
@@ -284,7 +290,7 @@ public:
 	}
 
 	void RotateL(Node* parent)
-	{//×óĞı
+	{//å·¦æ—‹
 		Node* subR = parent->_right;
 		Node* subRL = subR->_left;
 
@@ -317,7 +323,7 @@ public:
 
 
 	void RotateR(Node* parent)
-	{//ÓÒĞı
+	{//å³æ—‹
 		Node* subL = parent->_left;
 		Node* subLR = subL->_right;
 
@@ -351,7 +357,7 @@ public:
 	}
 
 	void RotateLR(Node* parent)
-	{//×óÓÒ
+	{//å·¦å³
 		Node* subL = parent->_left;
 		Node* subLR = subL->_right;
 		int bf = subLR->_bf;
@@ -378,7 +384,7 @@ public:
 	}
 
 	void RotateRL(Node* parent)
-	{//ÓÒ×ó
+	{//å³å·¦
 		Node* subR = parent->_right;
 		Node* subRL = subR->_left;
 		int bf = subRL->_bf;
