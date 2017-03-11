@@ -3,6 +3,13 @@
 #ifndef  _SEQLISTD_H
 #define  _SEQLISTD_H 
 
+/*
+*Author：seven17000
+*Date：2017.02.28
+*Content：实现动态增长单链表
+*/
+
+
 #include <stdio.h>
 #include <assert.h>
 
