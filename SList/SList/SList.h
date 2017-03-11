@@ -2,6 +2,13 @@
 #include<stdio.h>
 #include<assert.h>
 
+/*
+*Authorï¼šseven17000
+*Dateï¼š2016.10.15
+*Contentï¼šå®ç°å•é“¾è¡¨
+*/
+
+
 typedef int DataType;
 typedef struct Node
 {
@@ -9,40 +16,40 @@ typedef struct Node
 	struct Node* next;   
 }Node, *PNode;
 
-void InitList(PNode* PHead);//³õÊ¼»¯µ¥Á´±í
-void PushBack(PNode* PHead);//Î²²å
-void PopBack(PNode* PHead);//Î²É¾
-void PushFront(PNode* PHead);//Í·²å
-void PopFront(PNode* PHead);//Í·É¾
+void InitList(PNode* PHead);//åˆå§‹åŒ–å•é“¾è¡¨
+void PushBack(PNode* PHead);//å°¾æ’
+void PopBack(PNode* PHead);//å°¾åˆ 
+void PushFront(PNode* PHead);//å¤´æ’
+void PopFront(PNode* PHead);//å¤´åˆ 
 
-void Destroy(PNode* PHeaf);//Ïú»Ùµ¥Á´±í
-PNode Find(PNode* PHead,DataType data);//²éÕÒ
-void Insert(PNode pos, DataType data);//²åÈë½áµã
-PNode EndNode(PNode *pHead);//·µ»Ø×îºóÒ»¸ö½Úµã
-PNode ByeNode(PNode* PHead);//´´½¨Ò»¸ö½áµã
-void PrintList(PNode* PHead);//´òÓ¡µ¥Á´±í
+void Destroy(PNode* PHeaf);//é”€æ¯å•é“¾è¡¨
+PNode Find(PNode* PHead,DataType data);//æŸ¥æ‰¾
+void Insert(PNode pos, DataType data);//æ’å…¥ç»“ç‚¹
+PNode EndNode(PNode *pHead);//è¿”å›æœ€åä¸€ä¸ªèŠ‚ç‚¹
+PNode ByeNode(PNode* PHead);//åˆ›å»ºä¸€ä¸ªç»“ç‚¹
+void PrintList(PNode* PHead);//æ‰“å°å•é“¾è¡¨
 
-void EraseNotTail(PNode pos);//É¾³ıÎŞÍ·µ¥Á´±íµÄ·ÇÎ²½áµã
-void InsertFrontNode(PNode pos, DataType data);//ÔÚµ±Ç°½ÚµãÇ°²åÈëÒ»¸öÊı¾İdata
-void Erase(PNode* pHead, PNode pos);//É¾³ıposÎ»ÖÃµÄ½áµã
-void Remove(PNode* pHead, DataType data);//É¾³ıÁ´±íÖĞµÚÒ»¸öÖµÎªdataµÄ½áµã
-void RemoveAll(PNode* pHead, DataType data);//É¾³ıËùÓĞÖµÎªdataµÄ½áµã
+void EraseNotTail(PNode pos);//åˆ é™¤æ— å¤´å•é“¾è¡¨çš„éå°¾ç»“ç‚¹
+void InsertFrontNode(PNode pos, DataType data);//åœ¨å½“å‰èŠ‚ç‚¹å‰æ’å…¥ä¸€ä¸ªæ•°æ®data
+void Erase(PNode* pHead, PNode pos);//åˆ é™¤posä½ç½®çš„ç»“ç‚¹
+void Remove(PNode* pHead, DataType data);//åˆ é™¤é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªå€¼ä¸ºdataçš„ç»“ç‚¹
+void RemoveAll(PNode* pHead, DataType data);//åˆ é™¤æ‰€æœ‰å€¼ä¸ºdataçš„ç»“ç‚¹
 
-PNode EndNode(PNode *pHead);//·µ»Ø×îºóÒ»¸ö½Úµã 
-PNode JosephCycle(PNode* PHead, int num);//Ô¼Éª·ò»·ÎÊÌâ
-PNode FindMidNode(PNode PHead);//²éÕÒÖĞ¼ä½áµã
-PNode FindTailK(PNode PHead);//²éÕÒµ¹ÊıµÚk¸ö½áµã 
-void PrintListFromT2H(PNode pHead);//ÄæĞò´òÓ¡Á´±í
-void DeleteNotTail(PNode pos);//É¾³ı·ÇÎ²½áµã
-void InsertNotHead(PNode pHead, PNode pos, DataType data);//ÔÚ·ÇÍ·½áµãÇ°²åÈë½áµã
-PNode FindLastKNode(PNode pHead, int k);//ÕÒµ½×îºóÒ»¸öÎªkµÄ½áµã
-PNode ReverseList(PNode pHead);//ÄæĞòµ¥Á´±í
+PNode EndNode(PNode *pHead);//è¿”å›æœ€åä¸€ä¸ªèŠ‚ç‚¹ 
+PNode JosephCycle(PNode* PHead, int num);//çº¦ç‘Ÿå¤«ç¯é—®é¢˜
+PNode FindMidNode(PNode PHead);//æŸ¥æ‰¾ä¸­é—´ç»“ç‚¹
+PNode FindTailK(PNode PHead);//æŸ¥æ‰¾å€’æ•°ç¬¬kä¸ªç»“ç‚¹ 
+void PrintListFromT2H(PNode pHead);//é€†åºæ‰“å°é“¾è¡¨
+void DeleteNotTail(PNode pos);//åˆ é™¤éå°¾ç»“ç‚¹
+void InsertNotHead(PNode pHead, PNode pos, DataType data);//åœ¨éå¤´ç»“ç‚¹å‰æ’å…¥ç»“ç‚¹
+PNode FindLastKNode(PNode pHead, int k);//æ‰¾åˆ°æœ€åä¸€ä¸ªä¸ºkçš„ç»“ç‚¹
+PNode ReverseList(PNode pHead);//é€†åºå•é“¾è¡¨
 
-void BubbleSort(PNode pHead);//Ã°ÅİÅÅĞò
-PNode MergeList(PNode pList1, PNode pList);//ºÏ²¢µ¥Á´±í
-int IsCross(PNode pHead1, PNode pHead2);//ÅĞ¶ÏÁ½Á´±íÊÇ·ñÏà½»
-PNode GetCrossNode(PNode pHead1, PNode pHead2);//»ñÈ¡Á½Á´±íµÄ½»µã
-PNode HasCircle(PNode pHead);//ÅĞ¶ÏÁ´±íÊÇ·ñ³É»·
-int GetCirclrLen(PNode pMeetNode);//»ñÈ¡»·µÄ³¤¶È
-PNode UnionSet(Node *list1, Node *list2);//ÇóÁ½¸öÒÑÅÅĞòµ¥Á´±íÖĞÏàÍ¬µÄÊı¾İ----´òÓ¡³öÀ´ 
-PNode GetInterNode(PNode pHead, PNode pMeetNode);//»ñÈ¡»·µÄÈë¿Úµã  
+void BubbleSort(PNode pHead);//å†’æ³¡æ’åº
+PNode MergeList(PNode pList1, PNode pList);//åˆå¹¶å•é“¾è¡¨
+int IsCross(PNode pHead1, PNode pHead2);//åˆ¤æ–­ä¸¤é“¾è¡¨æ˜¯å¦ç›¸äº¤
+PNode GetCrossNode(PNode pHead1, PNode pHead2);//è·å–ä¸¤é“¾è¡¨çš„äº¤ç‚¹
+PNode HasCircle(PNode pHead);//åˆ¤æ–­é“¾è¡¨æ˜¯å¦æˆç¯
+int GetCirclrLen(PNode pMeetNode);//è·å–ç¯çš„é•¿åº¦
+PNode UnionSet(Node *list1, Node *list2);//æ±‚ä¸¤ä¸ªå·²æ’åºå•é“¾è¡¨ä¸­ç›¸åŒçš„æ•°æ®----æ‰“å°å‡ºæ¥ 
+PNode GetInterNode(PNode pHead, PNode pMeetNode);//è·å–ç¯çš„å…¥å£ç‚¹  
