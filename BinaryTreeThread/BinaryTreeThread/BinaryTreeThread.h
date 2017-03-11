@@ -3,14 +3,20 @@
 #include<iostream>
 using namespace std;
 
-//Ã¶¾Ù¶¨Òå½áµãÏßË÷»¯±êÇ©
+/*
+*Authorï¼šseven17000
+*Dateï¼š2017.01.20
+*Contentï¼šå®ç°äº†äºŒå‰æ ‘çš„çº¿ç´¢åŒ–
+*/
+
+//æšä¸¾å®šä¹‰ç»“ç‚¹çº¿ç´¢åŒ–æ ‡ç­¾
 enum PointerTag
 {
 	THREAD,
 	LINK
 };
 
-//¶¨ÒåÏßË÷»¯¶ş²æÊ÷½áµãÄ£°åÀà
+//å®šä¹‰çº¿ç´¢åŒ–äºŒå‰æ ‘ç»“ç‚¹æ¨¡æ¿ç±»
 template<class T>
 struct BinaryTreeThreadNode
 {
@@ -33,7 +39,7 @@ struct BinaryTreeThreadNode
 
 template<class>
 
-//¶¨ÒåÏßË÷»¯¶ş²æÊ÷Ä£°åÀà
+//å®šä¹‰çº¿ç´¢åŒ–äºŒå‰æ ‘æ¨¡æ¿ç±»
 template<class T>
 class BinaryTreeThread
 {
