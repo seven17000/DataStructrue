@@ -2,9 +2,9 @@
 #include <vector>
 
 /*
-*Author£ºseven17000
-*Date£º2017.1.10
-*Content£ºÊµÏÖ¶Ñ
+*Authorï¼šseven17000
+*Dateï¼š2017.1.10
+*Contentï¼šå®ç°å †
 */
 
 template<class T>
@@ -35,13 +35,7 @@ public:
 	Heap(T* a, size_t n)
 		:_a(a, a+n)
 	{
-		/*_a.reserve(n);
-		for (size_t i = 0; i < n; ++i)
-		{
-			_a.push_back(a[i]);
-		}*/
-
-		// ½¨¶Ñ
+		// å»ºå †
 		for(int i = (_a.size()-2)/2; i >= 0; i--)
 		{
 			_AdjustDown(i);
@@ -68,10 +62,8 @@ protected:
 
 		int parent = (child-1)/2;
 		
-		//while(parent >= 0) ÓĞÎÊÌâ£¿
 		while(child > 0)
 		{
-			//if (_a[parent] < _a[child])
 			if (compare(_a[child], _a[parent]))
 			{
 				swap(_a[parent], _a[child]);
@@ -85,7 +77,7 @@ protected:
 		}
 	}
 
-	// ¸ùµÄ×óÓÒ×ÓÊ÷¶¼ÊÇ¶Ñ
+	// æ ¹çš„å·¦å³å­æ ‘éƒ½æ˜¯å †
 	void _AdjustDown(int root)
 	{
 		Compare compare;
@@ -93,18 +85,14 @@ protected:
 		int child = root*2+1;
 		while(child < _a.size()) //?
 		{
-			// ÕÒ×óÓÒº¢×ÓÀïÃæ´óµÄÄÇÒ»¸ö
-			//if (child+1 < _a.size()
-			//	&& _a[child+1] > _a[child])
 			if (child+1 < _a.size()
 				&& compare(_a[child+1],_a[child]))
 			{
 				++child;
 			}
 
-			// 1.Èç¹ûº¢×Ó´óÓÚ¸¸Ç×£¬Ôò½»»»£¬¼ÌĞøÍùÏÂµ÷Õû
-			// 2.·ñÔò£¬½áÊø
-			//if (_a[child] > _a[parent])
+			// 1.å¦‚æœå­©å­å¤§äºçˆ¶äº²ï¼Œåˆ™äº¤æ¢ï¼Œç»§ç»­å¾€ä¸‹è°ƒæ•´
+			// 2.å¦åˆ™ï¼Œç»“æŸ
 			if(compare(_a[child],_a[parent]))
 			{
 				swap(_a[child], _a[parent]);
@@ -135,9 +123,6 @@ protected:
 	}
 
 protected:
-	//T* _a;
-	//size_t _size;
-	//size_t _capacity;
 	vector<T> _a;
 };
 
@@ -210,13 +195,13 @@ void GetTopK(int* a, const int n, const int k)
 		heap[i] = a[i];
 	}
 
-	// ½¨¶Ñ
+	// å»ºå †
 	for(int i = (k-2)/2; i >= 0; --i)
 	{
 		AdjustDown(heap, k, i);
 	}
 
-	// Ñ¡×î´óµÄÇ°k¸ö
+	// é€‰æœ€å¤§çš„å‰kä¸ª
 	for (size_t i = k; i < n; ++i)
 	{
 		if(a[i] > heap[0])
@@ -227,7 +212,7 @@ void GetTopK(int* a, const int n, const int k)
 		AdjustDown(heap, k, 0);
 	}
 
-	cout<<"×î´óµÄÇ°"<<k<<"¸öÊı¾İ:"<<endl;
+	cout<<"æœ€å¤§çš„å‰"<<k<<"ä¸ªæ•°æ®:"<<endl;
 	for (size_t i = 0; i < k; ++i)
 	{
 		cout<<heap[i]<<" ";
@@ -255,12 +240,12 @@ void TestTopK()
 	GetTopK(a, N, K);
 }
 
-// ½µĞò
+// é™åº
 void HeapSort(int* a, int n)
 {
 	assert(n);
 
-	// ½¨Ğ¡¶Ñ
+	// å»ºå°å †
 	for(int i = (n-2)/2; i >= 0; --i)
 	{
 		AdjustDown(a, n, i);
