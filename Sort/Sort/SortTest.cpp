@@ -74,12 +74,77 @@ using namespace std;
 //	}
 //}
 
+//void AdjustDown(int* arr, size_t root, size_t count)
+//{//¶ÑÅÅÐòµ÷Õû
+//	size_t parent = root;
+//	size_t child = parent * 2 + 1;
+//	while (parent<count)
+//	{
+//		if (child + 1 < count&&arr[child + 1]>arr[child])
+//		{
+//			++child;
+//		}
+//		if (child<count&&arr[child] > arr[parent])
+//		{
+//			std::swap(arr[child], arr[parent]);
+//			parent = child;
+//			child = parent * 2 + 1;
+//		}
+//		else
+//		{
+//			break;
+//		}
+//	}
+//
+//}
+//
+//void HeapSort(int* arr, size_t size)
+//{//¶ÑÅÅÐò
+//	for (int i = (size - 1) / 2; i >= 0; i--)
+//	{
+//		AdjustDown(arr, i, size);
+//	}
+//	size_t end = size - 1;
+//	while (end > 0)
+//	{
+//		swap(arr[0], arr[end]);
+//		AdjustDown(arr, 0, end);
+//		end--;
+//	}
+//
+//}
+
+//void BubbleSort(int* a, int len)
+//{
+//	int i = 0;
+//	int j = 0;
+//	for (i = 0; i < len ; i++)
+//	{
+//		int flag = 0;
+//		for (j = 1; j < len - i; ++j)
+//		{
+//
+//			if (a[j - 1] > a[j])
+//			{
+//				int tmp = a[j - 1];
+//				a[j - 1] = a[j];
+//				a[j] = tmp;
+//				flag = 1;
+//			}
+//		}
+//		if (flag = 0)
+//			return;
+//	}
+//}
+
 int main()
 {
-	int a[] = {1,8,3,6,5,2,4,9};
+	int a[] = {1,8,3,6,5,2,4};
 	//InsertSort(a, sizeof(a)/sizeof(a[0]));
 	//ShellSort(a, sizeof(a) / sizeof(a[0]));
-	SelectSort(a, sizeof(a) / sizeof(a[0]));
+	//SelectSort(a, sizeof(a) / sizeof(a[0]));
+	/*HeapSort(a, sizeof(a) / sizeof(a[0]));*/
+	/*BubbleSort(a, sizeof(a) / sizeof(a[0]));*/
 	for (int i = 0; i < (sizeof(a) / sizeof(a[0]));i++)
 		cout << a[i] << ' ';
 	return 0;
