@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 using namespace std;
 
@@ -115,7 +114,7 @@ using namespace std;
 //}
 
 //void BubbleSort(int* a, int len)
-//{
+//{//√∞≈›≈≈–Ú
 //	int i = 0;
 //	int j = 0;
 //	for (i = 0; i < len ; i++)
@@ -137,6 +136,33 @@ using namespace std;
 //	}
 //}
 
+void QuickSort(int* a,int l, int r)
+{//øÏ≈≈
+	if (l < r)
+	{
+		
+		int i = l, 
+		int	j = r, 
+		int	x = a[l];
+		while (i < j)
+		{
+			while (i < j && a[j] >= x)
+				j--;
+			if (i < j)
+				a[i++] = a[j];
+
+			while (i < j && a[i] < x)  
+				i++;
+			if (i < j)
+				a[j--] = a[i];
+		}
+		a[i] = x;
+
+		QuickSort(a, l, i - 1);  
+		QuickSort(a, i + 1, r);
+	}
+}
+
 int main()
 {
 	int a[] = {1,8,3,6,5,2,4};
@@ -145,6 +171,7 @@ int main()
 	//SelectSort(a, sizeof(a) / sizeof(a[0]));
 	/*HeapSort(a, sizeof(a) / sizeof(a[0]));*/
 	/*BubbleSort(a, sizeof(a) / sizeof(a[0]));*/
+	QuickSort(a, 0, sizeof(a) / sizeof(a[0])-1);
 	for (int i = 0; i < (sizeof(a) / sizeof(a[0]));i++)
 		cout << a[i] << ' ';
 	return 0;
