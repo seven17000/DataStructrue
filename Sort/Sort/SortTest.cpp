@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+#include<heapapi.h>
 //void InsertSort(int* arr,int len)
 //{//插入排序
 //	int i = 0;
@@ -136,32 +136,92 @@ using namespace std;
 //	}
 //}
 
-void QuickSort(int* a,int l, int r)
-{//快排
-	if (l < r)
-	{
-		
-		int i = l, 
-		int	j = r, 
-		int	x = a[l];
-		while (i < j)
-		{
-			while (i < j && a[j] >= x)
-				j--;
-			if (i < j)
-				a[i++] = a[j];
+//void QuickSort(int* a,int l, int r)
+//{//快排
+//	if (l < r)
+//	{
+//		
+//		int i = l, 
+//		int	j = r, 
+//		int	x = a[l];
+//		while (i < j)
+//		{
+//			while (i < j && a[j] >= x)
+//				j--;
+//			if (i < j)
+//				a[i++] = a[j];
+//
+//			while (i < j && a[i] < x)  
+//				i++;
+//			if (i < j)
+//				a[j--] = a[i];
+//		}
+//		a[i] = x;
+//
+//		QuickSort(a, l, i - 1);  
+//		QuickSort(a, i + 1, r);
+//	}
+//}
 
-			while (i < j && a[i] < x)  
-				i++;
-			if (i < j)
-				a[j--] = a[i];
-		}
-		a[i] = x;
 
-		QuickSort(a, l, i - 1);  
-		QuickSort(a, i + 1, r);
+void Marge(int* a, int start, int mid, int end, int* tmp)
+{//合并
+	int i = start;
+	int j = mid;
+	int k = mid + 1;
+	int l = end;
+
+	int index = start;
+	while (i <= j && k <= l)
+	{//选择两边较小的那个放入tmp
+		if (a[i] < a[k])
+			tmp[index++] = a[i++];
+		else
+			tmp[index++] = a[k++];
 	}
+
+	//此时一边已经为空，将另一边直接放入tmp
+	while (i <= j)
+	{
+		tmp[index++] = a[i++];
+	}
+	while (k <= l)
+	{
+		tmp[index++] = a[k++];
+	}
+
+	//把tmp放入a
+	for (int len = start; len <= end; ++len)
+		a[len] = tmp[len];
+
 }
+
+
+void _MargeSort(int* a, int start, int end, int* tmp)
+{
+	if (start >= end)
+		return;
+
+	int mid = (start + end)/2;
+
+	//分治思想处理两边
+	_MargeSort(a, start, mid, tmp);
+	_MargeSort(a, mid + 1, end, tmp);
+
+	Marge(a, start, mid, end, tmp);
+}
+
+
+
+void MargeSort(int* a, int len)
+{
+	int* tmp = new int[len];
+
+	_MargeSort(a, 0, len - 1, tmp);
+
+	delete[] tmp;
+}
+
 
 int main()
 {
@@ -171,7 +231,8 @@ int main()
 	//SelectSort(a, sizeof(a) / sizeof(a[0]));
 	/*HeapSort(a, sizeof(a) / sizeof(a[0]));*/
 	/*BubbleSort(a, sizeof(a) / sizeof(a[0]));*/
-	QuickSort(a, 0, sizeof(a) / sizeof(a[0])-1);
+	//QuickSort(a, 0, sizeof(a) / sizeof(a[0])-1);
+	MargeSort(a, sizeof(a) / sizeof(a[0]));
 	for (int i = 0; i < (sizeof(a) / sizeof(a[0]));i++)
 		cout << a[i] << ' ';
 	return 0;
