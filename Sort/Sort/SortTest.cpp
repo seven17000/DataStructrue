@@ -1,6 +1,5 @@
-#include<iostream>
-using namespace std;
-#include<heapapi.h>
+//#include<iostream>
+//using namespace std;
 //void InsertSort(int* arr,int len)
 //{//插入排序
 //	int i = 0;
@@ -163,77 +162,140 @@ using namespace std;
 //	}
 //}
 
+//void Marge(int* a, int start, int mid, int end, int* tmp)
+//{//合并
+//	int i = start;
+//	int j = mid;
+//	int k = mid + 1;
+//	int l = end;
+//
+//	int index = start;
+//	while (i <= j && k <= l)
+//	{//选择两边较小的那个放入tmp
+//		if (a[i] < a[k])
+//			tmp[index++] = a[i++];
+//		else
+//			tmp[index++] = a[k++];
+//	}
+//
+//	//此时一边已经为空，将另一边直接放入tmp
+//	while (i <= j)
+//	{
+//		tmp[index++] = a[i++];
+//	}
+//	while (k <= l)
+//	{
+//		tmp[index++] = a[k++];
+//	}
+//
+//	//把tmp放入a
+//	for (int len = start; len <= end; ++len)
+//		a[len] = tmp[len];
+//
+//}
+//
+//
+//void _MargeSort(int* a, int start, int end, int* tmp)
+//{
+//	if (start >= end)
+//		return;
+//
+//	int mid = (start + end)/2;
+//
+//	//分治思想处理两边
+//	_MargeSort(a, start, mid, tmp);
+//	_MargeSort(a, mid + 1, end, tmp);
+//
+//	Marge(a, start, mid, end, tmp);
+//}
+//
+//
+//
+//void MargeSort(int* a, int len)
+//{
+//	int* tmp = new int[len];
+//
+//	_MargeSort(a, 0, len - 1, tmp);
+//
+//	delete[] tmp;
+//}
+//
 
-void Marge(int* a, int start, int mid, int end, int* tmp)
-{//合并
-	int i = start;
-	int j = mid;
-	int k = mid + 1;
-	int l = end;
-
-	int index = start;
-	while (i <= j && k <= l)
-	{//选择两边较小的那个放入tmp
-		if (a[i] < a[k])
-			tmp[index++] = a[i++];
-		else
-			tmp[index++] = a[k++];
-	}
-
-	//此时一边已经为空，将另一边直接放入tmp
-	while (i <= j)
-	{
-		tmp[index++] = a[i++];
-	}
-	while (k <= l)
-	{
-		tmp[index++] = a[k++];
-	}
-
-	//把tmp放入a
-	for (int len = start; len <= end; ++len)
-		a[len] = tmp[len];
-
-}
+//int main()
+//{
+//	int a[] = {1,8,3,6,5,2,4};
+//	//InsertSort(a, sizeof(a)/sizeof(a[0]));
+//	//ShellSort(a, sizeof(a) / sizeof(a[0]));
+//	//SelectSort(a, sizeof(a) / sizeof(a[0]));
+//	/*HeapSort(a, sizeof(a) / sizeof(a[0]));*/
+//	/*BubbleSort(a, sizeof(a) / sizeof(a[0]));*/
+//	//QuickSort(a, 0, sizeof(a) / sizeof(a[0])-1);
+//	//MargeSort(a, sizeof(a) / sizeof(a[0]));
+//	for (int i = 0; i < (sizeof(a) / sizeof(a[0]));i++)
+//		cout << a[i] << ' ';
+//	return 0;
+//}
 
 
-void _MargeSort(int* a, int start, int end, int* tmp)
+//桶排序
+#include<iostream>
+#include<list>
+using namespace std;
+
+
+int GetMax(int* arr, int size)
 {
-	if (start >= end)
-		return;
-
-	int mid = (start + end)/2;
-
-	//分治思想处理两边
-	_MargeSort(a, start, mid, tmp);
-	_MargeSort(a, mid + 1, end, tmp);
-
-	Marge(a, start, mid, end, tmp);
+	int n = 1;
+	int base = 10;
+	for (int i = 0; i < size; ++i)
+	{
+		while (arr[i] >= base)
+		{
+			n++;
+			base *= 10;
+		}
+	}
+	return n;
 }
 
-
-
-void MargeSort(int* a, int len)
+void BucketSort(list<int>* l, int* a, int size)
 {
-	int* tmp = new int[len];
+	int i = 0;
+	int index = 0;
+	int n = GetMax(a, size);
+	int x = 1;
+	while (n--)
+	{
+		for (i = 0; i < size; ++i)
+		{
+			index = a[i] / x % 10;
+			l[index].push_back(a[i]);
+		}
 
-	_MargeSort(a, 0, len - 1, tmp);
-
-	delete[] tmp;
+		int j = 0;
+		int k = 0;
+		for (j = 0; j < 10; ++j)
+		{
+			while (!l[j].empty())
+			{
+				a[k++] = l[j].front();
+				l[j].pop_front();
+			}
+		}
+		x *= 10;
+	}
 }
-
 
 int main()
 {
-	int a[] = {1,8,3,6,5,2,4};
-	//InsertSort(a, sizeof(a)/sizeof(a[0]));
-	//ShellSort(a, sizeof(a) / sizeof(a[0]));
-	//SelectSort(a, sizeof(a) / sizeof(a[0]));
-	/*HeapSort(a, sizeof(a) / sizeof(a[0]));*/
-	/*BubbleSort(a, sizeof(a) / sizeof(a[0]));*/
-	//QuickSort(a, 0, sizeof(a) / sizeof(a[0])-1);
-	MargeSort(a, sizeof(a) / sizeof(a[0]));
-	for (int i = 0; i < (sizeof(a) / sizeof(a[0]));i++)
-		cout << a[i] << ' ';
+	list<int> l[10];
+
+	int a[10] = { 12,45,13,65,85,111,23,15,17,56 };
+	int len = sizeof(a) / sizeof(a[0]);
+	BucketSort(l, a, len);
+	for (int i = 0; i < len; i++)
+	{
+		cout << a[i] << " ";
+	}
 	return 0;
 }
