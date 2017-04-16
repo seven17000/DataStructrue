@@ -155,28 +155,40 @@ public:
 	{
 		stack<Node*> s;
 		Node* cur = _root;
-		Node* prev = NULL;
-		while (!s.empty() || cur)
+		Node* pre = NULL;
+		
+		if(cur == NULL)
 		{
-			while (cur)
+			return;
+		}
+		
+		while(cur)
+		{	
+			s.push(cur);
+			cur = cur->_left
+		}
+		
+		while(!s.empty())
+		{
+			cur = s.top();
+			if(cur->right == NULL ||　cur->right == pre)
 			{
-				s.push(cur);
-				cur = cur->_left;
-			}
-
-			Node* top = s.top();
-			if (top->_right == NULL||top->_right == prev)
-			{
-				cout << top->_data;
-				prev = top;
+				cout<<cur->_data;
+				pre = cur;
 				s.pop();
 			}
 			else
-			{
-				cur = top->_right;
+			{	
+				cur = cur->right;
+				s.push(cur);
+				while(cur)
+				{
+					cur = cur->left;
+					s.push(cur);
+				}
 			}
 		}
-		cout << endl;
+		cout<<endl;
 	}
 
 	size_t Depth()
