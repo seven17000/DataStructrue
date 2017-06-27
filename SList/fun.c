@@ -33,9 +33,7 @@ void PopBack(PNode* PHead)//βɾ
 	}
 	else if(NULL == (*PHead)->next)
 	{
-		PNode TempNode = *PHead;
-		free(TempNode);
-		TempNode = NULL;
+		free(*PHead);
 		*PHead = NULL;
 	}
 	else
@@ -45,6 +43,7 @@ void PopBack(PNode* PHead)//βɾ
 		{
 			PCur = PCur->next;
 		}
+		free(PCur->next);
 		PCur->next = NULL;
 	}
 }
@@ -88,6 +87,7 @@ void PopFront(PNode *PHead)//ͷɾ
 	}
 	else if (NULL == (*PHead)->next)
 	{
+		free(*PHead);
 		*PHead = NULL;
 	}
 	else
